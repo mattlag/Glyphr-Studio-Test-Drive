@@ -8,9 +8,9 @@ Setup is pretty simple:
  - First, copy the files from the /app/ folder from this project to wherever you 
 will be hosting this Test Drive
  - From Glyphr Studio, save a Glyphr Studio Project File (.txt)
- - Open this text file in a text editor, and add ```_UI.font = ``` to the very begining of the file.  For 
- extra points you can add a semicolon ```;``` to the very end of the file.
- - - We're working on fixing this, it's kind of a hack
+ - Open this text file in a text editor, and add ```_UI.font = ``` to the very beginning of the file.  For 
+ extra points you can add a semicolon ```;``` to the very end of the file. (This is awkward, and we're working 
+ on fixing this. It's kind of a hack.)
  - Save your text file as 'font.js', overwriting the sample font.js in the /app/ folder
 
 If you want, you can go into settings.js and change the sampletext to something other than 'hello'.
