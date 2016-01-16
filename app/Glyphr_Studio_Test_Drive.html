@@ -27,20 +27,18 @@
 
 <link rel="stylesheet" type="text/css" href="Glyphr_Studio_Test_Drive.css" />
 
+<script src="settings.js"></script>
+<script src="font.js"></script>
+<script src="script.js"></script>
 <script src="Glyphr_Studio_-_1.04.04.core.min.js"></script>
-<script src="page_testdrive.js"></script>
-
+<script>
+</script>
 </head>
 
 <body>
-
-    <div style='margin:70px; font-size:40px;'>
-        <h2 style='text-transform: none; color:rgb(0,140,210);'>Glyphr Studio</h2>
-        <br/>
-        The free, web based font designer
-        <br>
-        <span style='font-size:14px;'>Send us an email: <a href='mailto:mail@glyphrstudio.com&subject=Howdy'>mail@glyphrstudio.com</a></span>
-    </div>
-
+    <textarea id="tdtextarea" onkeyup="redraw_TestDrive()"></textarea><br>
+    <canvas id="tdcanvas"></canvas><br>
+    <div id="tdoptions"></div><br>
+    <div id="genimg" style="display:none;"></div>
 </body>
 </html>
