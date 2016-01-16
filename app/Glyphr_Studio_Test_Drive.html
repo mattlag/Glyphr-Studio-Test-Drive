@@ -36,9 +36,21 @@
 </head>
 
 <body>
-    <textarea id="tdtextarea" onkeyup="redraw_TestDrive()"></textarea><br>
-    <canvas id="tdcanvas"></canvas><br>
-    <div id="tdoptions"></div><br>
+    <div id="loadingwrapper"><div id="loading">loading font...</div></div>
+    <table class="maintable">
+        <tr><td>
+            <canvas id="tdcanvas"></canvas>
+        </td></tr>
+        <tr><td>
+            <textarea id="tdtextarea" onkeyup="redraw_TestDrive()"></textarea>
+        </td></tr>
+        <tr><td>
+            <div id="tdoptions"></div>
+        </td></tr>
+        <tr><td>
+            <div id="tdfooter">Made with <a href="http://www.glyphrstudio.com" target=_new>Glyphr Studio</a></div>
+        </td></tr>
+    </table>
     <div id="genimg" style="display:none;"></div>
 </body>
 </html>

@@ -3,6 +3,19 @@
  Studio project file (.txt) and your own web server, you can host an interactive Test Drive page where 
  people can play with your font (without having to export to an actual font file).
 
+## Setup
+Setup is pretty simple:
+ - First, copy the files from the /app/ folder from this project to wherever you 
+will be hosting this Test Drive.
+ - From Glyphr Studio, save a Glyphr Studio Project File (.txt)
+ - Open this text file in a text editor, and add ```_UI.font = ``` to the very begining of the file
+ -- We're working on fixing this, it's kind of a hack
+ - Save your text file as 'font.js', overwriting the sample font.js in the /app/ folder
+
+ If you want, you can go into settings.js and change the sampletext to something other than 'hello'
+
+ if you have any questions, email [mail@glyphrstudio.com](mailto:mail@glyphrstudio.com)
+
 
 ## Links
 To find out more about the parent project, Glyphr Studio, check out:

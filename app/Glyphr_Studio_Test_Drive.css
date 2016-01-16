@@ -26,7 +26,7 @@
 
 	body {
 		background-color:rgb(250,252,255);
-		overflow:hidden;
+		text-align: center;
 	}
 
 	input,
@@ -57,8 +57,7 @@
 	}
 
 	input[type=number]{
-		text-align: right;
-		width:70px;
+		width:50px;
 		border:1px solid white;
 		border:1px solid rgb(229,234,239);
 		cursor: default;
@@ -222,28 +221,33 @@
 		border-radius: 0px;
 	}
 
-	.inlineinputbutton,
-	.inlineinputbutton:hover,
-	.inlineinputbutton:active,
-	.inlineinputbutton:focus {
-		padding:0px;
-		height:26px;
-		font-size:1.2em;
-		text-align:center;
-		font-weight:bold;
-		vertical-align: bottom;
-		margin:0px 0px 0px 0px;
-	}
-
-	.inlineinputbutton:hover {
-		color:white;
-	}
 
 
 
 /* ----------------- */
-/* Page - Testdrive */
+/* Testdrive */
 /* --------------- */
+
+	#loadingwrapper{
+		width:99%;
+		position: absolute;
+		top:50px;
+		text-align: center;
+	}
+
+	#loading{
+		display: block;
+		margin:0px auto;
+		width:100px;
+	}
+
+	.maintable {
+		margin:10px auto;
+	}
+
+	.detail td {
+		padding-right:16px;
+	}
 
 	#tdcanvas {
 		background-color:white;
@@ -261,13 +265,7 @@
 		font-size:2em;
 	}
 
-	#roughptsize {
-		padding-left: 6px;
-	}
-
-	.sampletext,
-	.sampletext:hover,
-	.sampletext:active,
-	.sampletext:focus {
-		padding:4px 6px;
+	#tdfooter {
+		padding-top:12px;
+		font-size:.8em;
 	}

@@ -3,24 +3,23 @@ _GP = {};
 _UI = {
 	
 	// Version
-	'thisGlyphrStudioVersion': 'Version 0.1',
-	'thisGlyphrStudioVersionNum': '0.0.1',
+	'thisGlyphrStudioVersion': 'Version 1.0',
+	'thisGlyphrStudioVersionNum': '1.0.0',
 
 	'coremode': true,
 	'devmode': true,
+	'debug': true,
 
 	'view': {},
 	'testdrive': {
+		'firstrun': true,
 		'ctx': false,
 		'canvas': false,
-		'sampletext': '',
+		'sampletext': 'hello',
 		'fontscale': 100,
 		'fontsize': 100,
 		'linegap': false,
 		'padsize': 0,
-		'showglyphbox': false,
-		'showhorizontals': false,
-		'flattenglyphs': true,
 		'cache':{}
 	},
 

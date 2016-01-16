@@ -10,7 +10,7 @@
 
 		debug('\t loading font');
 
-		hydrateGlyphrProject(_UI.font);
+		setTimeout(function(){ hydrateGlyphrProject(_UI.font, redraw_TestDrive); }, 10);
 
 		// var f = evt.dataTransfer || document.getElementById('filechooser');
 		// var reader = new FileReader();
@@ -23,7 +23,7 @@
 		// reader.readAsText(f);
 
 		debug('\t redrawing');
-		redraw_TestDrive();
+		// redraw_TestDrive();
 
 		debug(' coreMode_OnLoad - END\n');
 	}
@@ -35,15 +35,23 @@
 	*/
 	function redraw_TestDrive(){
 		debug("\n redraw_TestDrive - START");
+
+		document.getElementById('loadingwrapper').style.display = 'none';
 		_UI.redrawing = true;
 
 		var td = _UI.testdrive;
 		var ps = _GP.projectsettings;
 		var txtarea = document.getElementById('tdtextarea');
 
-		_UI.testdrive.sampletext = txtarea.value; 
+		if(td.firstrun) {
+			txtarea.value = td.sampletext;
+			txtarea.focus();
+			td.firstrun = false;
+		} else {
+			_UI.testdrive.sampletext = txtarea.value;			
+		}
 
-		document.getElementById('tdtextarea').value = td.sampletext;
+		txtarea.value = td.sampletext;
 		document.getElementById('tdoptions').innerHTML = drawTDOptions();
 		changefontscale(td.fontsize);
 
@@ -187,58 +195,15 @@
 		return carr;
 	}
 
-	function drawLine(y){
-		debug('TESTDRIVE - Drawing h line at ' + y);
-		y = y.makeCrisp();
-		_UI.testdrive.ctx.strokeStyle = _UI.colors.blue.l65;
-		_UI.testdrive.ctx.beginPath();
-		_UI.testdrive.ctx.lineWidth = 1;
-		_UI.testdrive.ctx.moveTo(0,y);
-		_UI.testdrive.ctx.lineTo(_UI.testdrive.canvas.width,y);
-		_UI.testdrive.ctx.stroke();
-		_UI.testdrive.ctx.closePath();
-	}
-
-	function drawSampletextButtons(){
-		var content = '<h3>pangrams</h3>';
-		content += makeTDButton('the five boxing wizards jump quickly');
-		content += makeTDButton('pack my box with five dozen liquor jugs');
-		content += makeTDButton('the quick brown fox jumps over a lazy dog');
-		content += makeTDButton('amazingly few discotheques provide jukeboxes');
-		content += makeTDButton('quick enemy movement will<br>jeopardize six of the gunboats');
-		content += '<br><h3>glyph sets</h3>';
-		content += makeTDButton('abcdefghijklmnopqrstuvwxyz');
-		content += makeTDButton('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
-		content += makeTDButton('0123456789');
-		content += makeTDSymbolButton();
-
-		return content;
-	}
-
-	function makeTDButton(text){
-		var val = text.replace('<br>', ' ');
-		return '<button class="sampletext" onclick="_UI.testdrive.sampletext=\''+val+'\';redraw_TestDrive();">'+text+'</button><br>';
-	}
-
-	function makeTDSymbolButton(){
-		return "<button class='sampletext' onclick='document.getElementById(\"tdtextarea\").value=\"!\\\"#$%&&#39;()*+,-./:;\\\<=\\\>?@[\\\\]^_`{|}~\";redraw_TestDrive();'>!\"#$%&&#39;()*+,-./:;\<=\>?@[\\]^_`{|}~</button><br>";
-	}
-
 	function drawTDOptions(){
 		if(!_UI.testdrive.linegap) _UI.testdrive.linegap = _GP.projectsettings.linegap;
 		if(!isval(_UI.testdrive.padsize)) _UI.testdrive.padsize = _GP.projectsettings.defaultlsb;
 
-		var content = '<table class="detail">';
-		content += '<tr><td> font size <span class="unit">(px)</span> </td><td><input type="number" value="'+_UI.testdrive.fontsize+'" onchange="changefontscale(this.value); redraw_TestDrive();"></td></tr>';
-		content += '<tr><td> 96dpi font size <span class="unit">(pt)</span> </td><td><input type="number" disabled="disabled" id="roughptsize" valu="75"/></td></tr>';
-		content += '<tr><td> line gap <span class="unit">(em units)</span> </td><td><input type="number" value="'+_UI.testdrive.linegap+'" onchange="_UI.testdrive.linegap=this.value*1; redraw_TestDrive();"></td></tr>';
-		content += '<tr><td> glyph spacing <span class="unit">(em units)</span> </td><td><input type="number" value="'+_UI.testdrive.padsize+'" onchange="_UI.testdrive.padsize=this.value*1; redraw_TestDrive();"></td></tr>';
-		content += '<tr><td> <label for="showglyphbox">show glyph boxes</label> </td><td>' + checkUI("_UI.testdrive.showglyphbox", _UI.testdrive.showglyphbox, true) + "</td></tr>";
-		content += '<tr><td> <label for="showhorizontals">show baseline</label> </td><td>' + checkUI("_UI.testdrive.showhorizontals", _UI.testdrive.showhorizontals, true) + "</td></tr>";
-		
-		if(_UI.devmode) content += '<tr><td> <label for="flattenglyphs">flatten glyphs</label> </td><td>' + checkUI("_UI.testdrive.flattenglyphs", _UI.testdrive.flattenglyphs, false) + "</td></tr>";
-
-		content += '<tr><td colspan=2><button onclick="createimg();">generate png file</button></td></tr>';
+		var content = '<table class="detail"><tr>';
+		content += '<td> font size: <input type="number" value="'+_UI.testdrive.fontsize+'" onchange="changefontscale(this.value); redraw_TestDrive();"></td>';
+		content += '<td> line gap: <input type="number" value="'+_UI.testdrive.linegap+'" onchange="_UI.testdrive.linegap=this.value*1; redraw_TestDrive();"></td>';
+		content += '<td> glyph spacing: <input type="number" value="'+_UI.testdrive.padsize+'" onchange="_UI.testdrive.padsize=this.value*1; redraw_TestDrive();"></td>';
+		content += '<td><button onclick="createimg();">save as .png</button></td>';
 		content += '</table>';
 		return content;
 	}
@@ -246,7 +211,7 @@
 	function changefontscale(newval){
 		_UI.testdrive.fontsize = newval*1;
 		_UI.testdrive.fontscale = (newval/_GP.projectsettings.upm);
-		document.getElementById('roughptsize').value = (newval*0.75);
+		// document.getElementById('roughptsize').value = (newval*0.75);
 	}
 
 	function createimg(){
@@ -296,26 +261,6 @@
 		return sortarr;
 	}
 
-	function checkUI(varname, currbool, doredraw, invert){
-		//debug("CHECKUI -  varname:" + varname + " doredraw:" + doredraw);
-		var idname = varname.split('.');
-		idname = idname[idname.length-1];
-		if(invert) currbool = !currbool;
-
-		var re = '<input type="checkbox"';
-		re += (currbool? ' checked ' : ' ');
-		re += 'id="'+idname+'"';
-		re += 'onclick="'+varname+' = !'+varname+';';
-
-		if(doredraw){
-			re += ' history_put(\'Toggled '+idname+': '+!currbool+'\');';
-			re += ' redraw({calledby:\'checkbox '+idname+'\'});';
-		}
-
-		re += '"/>';
-
-		return re;
-	}
 
 
 //-------------------
