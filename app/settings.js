@@ -4,13 +4,18 @@ _UI = {
 	
 	// Version
 	'thisGlyphrStudioVersion': 'Version 1.0',
-	'thisGlyphrStudioVersionNum': '1.0.0',
+	'thisGlyphrStudioVersionNum': '1.0.1',
 
 	'coremode': true,
-	'devmode': true,
+	'devmode': false,
 	'debug': true,
 
-	'view': {},
+	'view': {			
+		'dx': 200,
+		'dy': 500,
+		'dz': 0.5
+	},
+
 	'testdrive': {
 		'firstrun': true,
 		'ctx': false,
@@ -20,7 +25,8 @@ _UI = {
 		'fontsize': 100,
 		'linegap': false,
 		'padsize': 0,
-		'cache':{}
+		'cache':{},
+		'showglyphbox': false
 	},
 
 	'colors': {

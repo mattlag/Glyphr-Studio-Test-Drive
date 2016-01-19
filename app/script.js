@@ -10,6 +10,7 @@
 
 		debug('\t loading font');
 
+		// loadingIndicatorStep(1);
 		setTimeout(function(){ hydrateGlyphrProject(_UI.font, redraw_TestDrive); }, 10);
 
 		// var f = evt.dataTransfer || document.getElementById('filechooser');
@@ -25,7 +26,7 @@
 		debug('\t redrawing');
 		// redraw_TestDrive();
 
-		debug(' coreMode_OnLoad - END\n');
+		debug(' coreMode_OnLoad - END');
 	}
 
 	/*
@@ -63,7 +64,7 @@
 		var pagepadding = 10;
 		var currx = pagepadding;
 		var curry = pagepadding + (ps.ascent*scale);
-		var cc, tc;
+		var cc, tc, adv;
 
 		tctx.clearRect(0,0,5000,5000);
 		if(td.showhorizontals) drawLine(curry);
@@ -99,23 +100,25 @@
 						);
 					}
 
-					debug('\t starting drawing ' + cc.name);
-					debug(cc);
+					debug('\n\n-------------------\nSTARTING drawing ' + cc.name);
+				
+					// if(_UI.testdrive.flattenglyphs){
+					// 	if(!_UI.testdrive.cache.hasOwnProperty(tc)){
+					// 		_UI.testdrive.cache[tc] = new Glyph(cc).flattenGlyph().combineAllShapes(true);
+					// 	}
 
-					if(_UI.testdrive.flattenglyphs){
-						if(!_UI.testdrive.cache.hasOwnProperty(tc)){
-							_UI.testdrive.cache[tc] = new Glyph(cc).flattenGlyph().combineAllShapes(true);
-						}
+					// 	adv = _UI.testdrive.cache[tc].drawGlyph(tctx, {'dz' : td.fontscale, 'dx' : currx, 'dy' : curry});
 
-						currx += _UI.testdrive.cache[tc].drawGlyph(tctx, {'dz' : td.fontscale, 'dx' : currx, 'dy' : curry}, true);
+					// } else {
+						adv = cc.drawGlyph(tctx, {'dz' : td.fontscale, 'dx' : currx, 'dy' : curry});
+					// }
 
-					} else {
-						currx += cc.drawGlyph(tctx, {'dz' : td.fontscale, 'dx' : currx, 'dy' : curry}, true);
-					}
-
+					debug('\t advance from drawGlyph returned ' + adv);
+					currx += adv;
 					currx += (td.padsize*1*scale);
 					currx += calculateKernOffset(tc, contentarray[k+1])*scale;
-					debug('\t done drawing ' + cc.name);
+					debug('\t currx is now ' + currx);
+					debug('ENDING drawing ' + cc.name);
 				}
 			}
 		}
@@ -267,16 +270,21 @@
 // View
 //-------------------
 	function setView(oa){
-
+		debug('\n setView - START');
+		debug('\t passed ' + json(oa, true));
 		// Check for which to set
 		if(isval(oa.dx)){ _UI.view.dx = oa.dx; }
 		if(isval(oa.dy)){ _UI.view.dy = oa.dy; }
 		if(isval(oa.dz)){ _UI.view.dz = oa.dz; }
 
-		//debug('SETVIEW - passed ' + JSON.stringify(oa) + ' selectedglyph ' + _UI.selectedglyph + ' VIEWS is\n' + JSON.stringify(_UI.views));
+		debug(' setView - END\n');
 	}
 
 	function getView(calledby){
+		debug('\n getView - START');
+		debug('\t calledby ' + calledby);
+		debug('\t returning ' + json(_UI.view, true));
+		debug(' getView - END\n');
 		return clone(_UI.view);
 	}
 
