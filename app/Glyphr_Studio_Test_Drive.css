@@ -235,10 +235,11 @@
 		text-align: center;
 	}
 
-	#loading{
+	.loading{
 		display: block;
 		margin:0px auto;
 		width:100px;
+		color:rgb(0,63,95);
 	}
 
 	.maintable {

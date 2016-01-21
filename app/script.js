@@ -1,7 +1,7 @@
 
 	function coreMode_OnLoad(){
  		debug('\n coreMode_OnLoad - START');
- 
+
 		_UI.testdrive.canvas = document.getElementById('tdcanvas');
 		_UI.testdrive.canvas.width = 800;
 		_UI.testdrive.canvas.height = 700;
@@ -10,8 +10,11 @@
 
 		debug('\t loading font');
 
-		// loadingIndicatorStep(1);
-		setTimeout(function(){ hydrateGlyphrProject(_UI.font, redraw_TestDrive); }, 10);
+		setTimeout(function(){
+			hydrateGlyphrProject(_UI.font, redraw_TestDrive);
+		}, 10);
+
+
 
 		// var f = evt.dataTransfer || document.getElementById('filechooser');
 		// var reader = new FileReader();
@@ -49,7 +52,7 @@
 			txtarea.focus();
 			td.firstrun = false;
 		} else {
-			_UI.testdrive.sampletext = txtarea.value;			
+			_UI.testdrive.sampletext = txtarea.value;
 		}
 
 		txtarea.value = td.sampletext;
@@ -101,22 +104,14 @@
 					}
 
 					debug('\n\n-------------------\nSTARTING drawing ' + cc.name);
-				
-					// if(_UI.testdrive.flattenglyphs){
-					// 	if(!_UI.testdrive.cache.hasOwnProperty(tc)){
-					// 		_UI.testdrive.cache[tc] = new Glyph(cc).flattenGlyph().combineAllShapes(true);
-					// 	}
 
-					// 	adv = _UI.testdrive.cache[tc].drawGlyph(tctx, {'dz' : td.fontscale, 'dx' : currx, 'dy' : curry});
-
-					// } else {
-						adv = cc.drawGlyph(tctx, {'dz' : td.fontscale, 'dx' : currx, 'dy' : curry});
-					// }
+					adv = cc.drawGlyph(tctx, {'dz' : td.fontscale, 'dx' : currx, 'dy' : curry});
 
 					debug('\t advance from drawGlyph returned ' + adv);
 					currx += adv;
 					currx += (td.padsize*1*scale);
 					currx += calculateKernOffset(tc, contentarray[k+1])*scale;
+					
 					debug('\t currx is now ' + currx);
 					debug('ENDING drawing ' + cc.name);
 				}
@@ -270,21 +265,21 @@
 // View
 //-------------------
 	function setView(oa){
-		debug('\n setView - START');
-		debug('\t passed ' + json(oa, true));
+		// debug('\n setView - START');
+		// debug('\t passed ' + json(oa, true));
 		// Check for which to set
 		if(isval(oa.dx)){ _UI.view.dx = oa.dx; }
 		if(isval(oa.dy)){ _UI.view.dy = oa.dy; }
 		if(isval(oa.dz)){ _UI.view.dz = oa.dz; }
 
-		debug(' setView - END\n');
+		// debug(' setView - END\n');
 	}
 
 	function getView(calledby){
-		debug('\n getView - START');
-		debug('\t calledby ' + calledby);
-		debug('\t returning ' + json(_UI.view, true));
-		debug(' getView - END\n');
+		// debug('\n getView - START');
+		// debug('\t calledby ' + calledby);
+		// debug('\t returning ' + json(_UI.view, true));
+		// debug(' getView - END\n');
 		return clone(_UI.view);
 	}
 

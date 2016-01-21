@@ -4,17 +4,9 @@ _UI = {
 	
 	// Version
 	'thisGlyphrStudioVersion': 'Version 1.0',
-	'thisGlyphrStudioVersionNum': '1.0.1',
+	'thisGlyphrStudioVersionNum': '1.0.2',
 
-	'coremode': true,
 	'devmode': false,
-	'debug': true,
-
-	'view': {			
-		'dx': 200,
-		'dy': 500,
-		'dz': 0.5
-	},
 
 	'testdrive': {
 		'firstrun': true,
@@ -29,6 +21,19 @@ _UI = {
 		'showglyphbox': false
 	},
 
+	'view': {			
+		'dx': 200,
+		'dy': 500,
+		'dz': 0.5
+	},
+
+	'mins': {
+		'xmax': -999999,
+		'xmin': 999999,
+		'ymax': -999999,
+		'ymin': 999999
+	},
+	
 	'colors': {
 
 		// ACCENT BLUE
@@ -80,5 +85,8 @@ _UI = {
 			'medium': 'rgb(240,15,54)',	// os red warning color
 			'dark': 'rgb(105,45,55)'	// os red warning color dark
 		}
-	}
+	},
+
+	'coremode': true,
+	'debug': true
 };
